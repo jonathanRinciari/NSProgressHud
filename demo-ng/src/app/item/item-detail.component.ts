@@ -3,7 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 
 import { Item } from "./item";
 import { ItemService } from "./item.service";
-import { NSProgressHud } from 'nativescript-NSProgressHud';
+import { NSProgressHud } from 'NSProgressHud';
 
 @Component({
     selector: "ns-details",

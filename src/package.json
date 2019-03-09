@@ -1,7 +1,7 @@
 {
-    "name": "nativescript-NSProgressHud",
+    "name": "NSProgressHud",
     "version": "1.0.0",
-    "description": "Your awesome NativeScript plugin.",
+    "description": "ProgressHud Plugin for Nativescript",
     "main": "NSProgressHud",
     "typings": "index.d.ts",
     "nativescript": {
@@ -20,6 +20,7 @@
         "tslint": "cd .. && tslint \"**/*.ts\" --config tslint.json --exclude \"**/node_modules/**\"",
         "plugin.tscwatch": "npm run tsc -- -w",
         "demo.ios": "npm run tsc && cd ../demo && tns run ios --syncAllFiles --emulator",
+        "demo.ios-ng": "npm run tsc && cd ../demo-ng && tns run ios --syncAllFiles --emulator",
         "demo.android": "npm run tsc && cd ../demo && tns run android --syncAllFiles --emulator",
         "demo.reset": "cd ../demo && npx rimraf -- hooks node_modules platforms package-lock.json",
         "plugin.prepare": "npm run build && cd ../demo && tns plugin remove nativescript-NSProgressHud && tns plugin add ../src",
@@ -31,17 +32,20 @@
         "NativeScript",
         "JavaScript",
         "Android",
-        "iOS"
+        "iOS",
+        "ProgressHud",
+        "Loader",
+        "Spinner"
     ],
     "author": {
-        "name": "Your Name",
-        "email": "youremail@yourdomain.com"
+        "name": "Jon Rinciari",
+        "email": "rinciarijoc@gmail.com"
     },
     "bugs": {
-        "url": "https://github.com/NativeScriptDeveloper/nativescript-NSProgressHud/issues"
+        "url": "https://github.com/jonathanrinciari/NSProgressHud/issues"
     },
     "license": "Apache-2.0",
-    "homepage": "https://github.com/NativeScriptDeveloper/nativescript-NSProgressHud",
+    "homepage": "https://github.com/jonathanrinciari/NSProgressHud",
     "readmeFilename": "README.md",
     "devDependencies": {
         "tns-core-modules": "^5.2.0",

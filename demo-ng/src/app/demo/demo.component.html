@@ -1,0 +1,18 @@
+<ActionBar title="NSProgressHud Demo" icon="" class="action-bar"></ActionBar>
+<StackLayout>
+  <GridLayout rows="* * * * * *" columns="*">
+    <FlexboxLayout class="btnWrapper" flexDirection="column" col="0" row="0">
+        <Button class="btn btn-primary customButton" text="Indeterminate" (tap)="show('indeterminate')"></Button>
+    </FlexboxLayout>
+    <FlexboxLayout class="btnWrapper" flexDirection="column" col="0" row="1">
+        <Button class="btn btn-primary customButton" (tap)="show('determinate')" text="Determinate"></Button>
+    </FlexboxLayout>
+    <FlexboxLayout class="btnWrapper" flexDirection="column" col="0" row="2">
+        <Button class="btn btn-primary customButton" (tap)="show('annular')" text="Annular Determinate"></Button>
+    </FlexboxLayout>
+    <FlexboxLayout class="btnWrapper" flexDirection="column" col="0" row="3">
+        <Button class="btn btn-primary customButton" (tap)="show('bar')" text="Bar Determinate"></Button>
+    </FlexboxLayout>
+  </GridLayout>
+</StackLayout>
+

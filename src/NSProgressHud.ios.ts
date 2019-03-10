@@ -12,6 +12,7 @@ interface ColorOption {
   progressTick?: number;
   minShowTime?: number;
   tickInterval?: number;
+  size?: {width: number, height: number};
   dimBackground?: boolean;
   progressType: 'annular' | 'determinate' | 'bar' | 'indeterminate';
 }
@@ -58,7 +59,6 @@ export class NSProgressHud extends Common {
       this.progress += this.progressTickMark;
       this._hud.progress = this.progress;
       if (this.progress >= 1) {
-        clearInterval(interval);
         this.dismiss();
       }
     }, this.tickInterval);
@@ -104,6 +104,11 @@ export class NSProgressHud extends Common {
 
     if (options.tickInterval) {
       this.tickInterval = options.tickInterval;
+    }
+
+    if (options.size) {
+      this._hud.size.width = options.size.width;
+      this._hud.size.height = options.size.height;
     }
 
     if (options.progressType) {

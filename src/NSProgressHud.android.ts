@@ -14,6 +14,7 @@ interface ColorOption {
   progressTick?: number;
   minShowTime?: number;
   tickInterval?: number;
+  size?: {width: number, height: number};
   dimBackground?: boolean;
   progressType: 'annular' | 'determinate' | 'bar' | 'indeterminate';
 }
@@ -89,6 +90,10 @@ export class NSProgressHud extends Common  {
 
     if (options.dimBackground) {
       this._progressHud.setDimAmount(1);
+    }
+
+    if (options.size) {
+      this._progressHud.setSize(options.size.height, options.size.width);
     }
 
     if (options.progressType) {

@@ -1,4 +1,5 @@
 import { Common } from './NSProgressHud.common';
+import { BehaviorSubject } from 'rxjs';
 interface ColorOption {
     backgroundColor?: string;
     hudColor?: string;
@@ -8,8 +9,11 @@ interface ColorOption {
     progressTick?: number;
     minShowTime?: number;
     tickInterval?: number;
-    width?: number;
-    height?: number;
+    size?: {
+        width: number;
+        height: number;
+    };
+    dimBackground?: boolean;
     progressType: 'annular' | 'determinate' | 'bar' | 'indeterminate';
 }
 export declare class NSProgressHud extends Common {
@@ -18,7 +22,9 @@ export declare class NSProgressHud extends Common {
     progressTickMark: number;
     tickInterval: number;
     constructor();
-    showProgress(message?: string, options?: ColorOption, progress?: any): void;
+    showProgress(message?: string, options?: ColorOption, progressStatus?: BehaviorSubject<{
+        progress: number;
+    }>): void;
     private updateProgress;
     dismiss(): void;
     private setOptions;

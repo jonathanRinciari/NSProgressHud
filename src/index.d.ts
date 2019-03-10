@@ -1,14 +1,24 @@
-import { Common } from "./NSProgressHud.common";
-
+import { Common } from './NSProgressHud.common';
 interface ColorOption {
-  backgroundColor?: string;
-  hudColor?: string;
-  spinnerColor?: string;
-  statusColor?: string;
+    backgroundColor?: string;
+    hudColor?: string;
+    spinnerColor?: string;
+    tintColor?: string;
+    labelColor?: string;
+    progressTick?: number;
+    minShowTime?: number;
+    tickInterval?: number;
+    progressType: 'annular' | 'determinate' | 'bar' | 'indeterminate';
 }
 export declare class NSProgressHud extends Common {
-  showLoading(message?: string, options?: ColorOption): void;
-  showSuccess(message?: string, options?: ColorOption): void;
-  showError(message?: string, options?: ColorOption): void;
-  private setOptions;
+    private _hud;
+    progress: any;
+    progressTickMark: number;
+    tickInterval: number;
+    constructor();
+    showProgress(message?: string, options?: ColorOption): void;
+    private updateProgress;
+    dismiss(): void;
+    private setOptions;
 }
+export {};

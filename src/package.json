@@ -20,8 +20,10 @@
         "tslint": "cd .. && tslint \"**/*.ts\" --config tslint.json --exclude \"**/node_modules/**\"",
         "plugin.tscwatch": "npm run tsc -- -w",
         "demo.ios": "npm run tsc && cd ../demo && tns run ios --syncAllFiles --emulator",
+        "demo.ios-ng": "npm run tsc && cd ../demo-ng && tns run ios --syncAllFiles --emulator",
         "demo.android": "npm run tsc && cd ../demo && tns run android --syncAllFiles --emulator",
-        "demo.reset": "cd ../demo && npx rimraf -- hooks node_modules platforms package-lock.json",
+        "demo.android-ng": "npm run tsc && cd ../demo-ng && tns run android --syncAllFiles --emulator",
+        "demo.reset": "cd ../demo-ng && npx rimraf -- hooks node_modules platforms package-lock.json",
         "plugin.prepare": "npm run build && cd ../demo && tns plugin remove NSProgressHud && tns plugin add ../src",
         "clean": "npm run demo.reset && npx rimraf -- node_modules package-lock.json && npm i",
         "ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**' --exclude '**/platforms/**'",
@@ -52,6 +54,8 @@
         "tslint": "^5.12.1",
         "semver": "^5.6.0"
     },
-    "dependencies": {},
+    "dependencies": {
+        "tns-android": "^5.2.1"
+    },
     "bootstrapper": "nativescript-plugin-seed"
 }

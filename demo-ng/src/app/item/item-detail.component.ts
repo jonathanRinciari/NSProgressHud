@@ -18,14 +18,16 @@ export class ItemDetailComponent implements OnInit {
         private route: ActivatedRoute
     ) {
         let spinner = new NSProgressHud();
-        spinner.showSuccess("Success");
-        setTimeout(() => {
-            spinner.showError("Error");
-        }, 5000);
+
+        spinner.showProgress("Success", {spinnerColor: '#FFFFFF', hudColor: '#808080', tintColor: '#FFF543', progressType: 'indeterminate',  labelColor: '#FFFFFF'});
 
         setTimeout(() => {
-        spinner.showLoading();
+            spinner.showProgress("Loading", {progressTick: .01, progressType: 'annular',  labelColor: '#FFFFFF'})
         }, 10000);
+
+        setTimeout(() => {
+            spinner.showProgress("Loading", {progressTick: .01, progressType: 'bar', labelColor: '#FFFFFF'})
+        }, 15000);
     }
 
     ngOnInit(): void {

@@ -12,30 +12,30 @@ interface ColorOption {
   progressTick?: number;
   minShowTime?: number;
   tickInterval?: number;
-  width?: number;
-  height?: number;
+  dimBackground?: boolean;
   progressType: 'annular' | 'determinate' | 'bar' | 'indeterminate';
 }
 export class NSProgressHud extends Common {
   private _hud: MBProgressHUD;
   progress: any = 0;
-  progressTickMark = 1;
+  progressTickMark = .1;
   tickInterval = 500;
 
   constructor() {
     super();
-    this._hud = MBProgressHUD.showHUDAddedToAnimated(iosApp.rootController.view, true);
-    this._hud.progress = this.progressTickMark;
   }
 
   showProgress(message?: string, options?: ColorOption, progressStatus?: BehaviorSubject<{progress: number}>) {
+    this._hud = MBProgressHUD.showHUDAddedToAnimated(iosApp.rootController.view, true);
+    this._hud.progress = this.progressTickMark;
+
     if (progressStatus) {
       const progress$ = progressStatus.subscribe((data: {progress: number}) => {
 
-        this._hud.progress = data.progress * .1;
-        if (data.progress * .1 >= 1) {
+        this._hud.progress = data.progress * .01;
+        if (data.progress * .01 >= 1) {
           progress$.unsubscribe();
-          this._hud.hideAnimated(true);
+          this.dismiss();
         }
       });
     }
@@ -46,7 +46,8 @@ export class NSProgressHud extends Common {
       this._hud.label.text = message;
     }
     if (!progressStatus) {
-      this._hud.progress = 1;
+      this.progress += .01;
+      this._hud.progress = this.progress;
       this.updateProgress(this.progress);
     }
     this._hud.showAnimated(true);
@@ -56,15 +57,16 @@ export class NSProgressHud extends Common {
   const interval = setInterval(() => {
       this.progress += this.progressTickMark;
       this._hud.progress = this.progress;
-      if (this.progress >= 100) {
+      if (this.progress >= 1) {
         clearInterval(interval);
-        this._hud.hideAnimated(true);
+        this.dismiss();
       }
     }, this.tickInterval);
   }
 
 
-  dismiss() {
+  public dismiss() {
+    this.progress = 0;
     this._hud.hideAnimated(true);
   }
 
@@ -76,6 +78,11 @@ export class NSProgressHud extends Common {
 
     if (options.hudColor) {
       this._hud.color = new Color(options.hudColor).ios;
+      this._hud.opacity = .6;
+    }
+
+    if (options.dimBackground) {
+      this._hud.dimBackground = true;
     }
 
     if (options.spinnerColor) {

@@ -14,12 +14,11 @@ interface ColorOption {
   progressTick?: number;
   minShowTime?: number;
   tickInterval?: number;
-  width?: number;
-  height?: number;
+  dimBackground?: boolean;
   progressType: 'annular' | 'determinate' | 'bar' | 'indeterminate';
 }
 
-export class NSProgressHud extends Common {
+export class NSProgressHud extends Common  {
   private _context: any;
   progress: any = 0;
   progressTickMark = 1;
@@ -27,11 +26,11 @@ export class NSProgressHud extends Common {
   private _progressHud: com.kaopiz.kprogresshud.KProgressHUD;
   constructor() {
     super();
-    this._context = androidApp.startActivity;
-    this._progressHud = new com.kaopiz.kprogresshud.KProgressHUD(this._context);
   }
 
-  showProgress(message?: string, options?: ColorOption, progressStatus?: BehaviorSubject<{progress: number}>) {
+  public showProgress(message?: string, options?: ColorOption, progressStatus?: BehaviorSubject<{progress: number}>) {
+    this._context = androidApp.startActivity;
+    this._progressHud = new com.kaopiz.kprogresshud.KProgressHUD(this._context);
     this._progressHud.setMaxProgress(100);
     if (progressStatus) {
       progressStatus.subscribe((data: {progress: number}) => {
@@ -46,7 +45,8 @@ export class NSProgressHud extends Common {
       this._progressHud.setLabel(message);
     }
     if (!progressStatus) {
-      this._progressHud.setProgress(1);
+      this.progress += 1;
+      this._progressHud.setProgress(this.progress);
       this.updateProgress(this.progress);
     }
 
@@ -59,18 +59,24 @@ export class NSProgressHud extends Common {
       this._progressHud.setProgress(this.progress);
       if (this.progress >= 100) {
         clearInterval(interval);
-        this._progressHud.dismiss();
+        this.dismiss();
       }
     }, this.tickInterval);
   }
 
-  setOptions(options: ColorOption) {
+  public dismiss() {
+    this._progressHud.dismiss();
+    this._progressHud.setProgress(0);
+    this.progress = 0;
+  }
+
+  private setOptions(options: ColorOption) {
     if (options.backgroundColor) {
-      this._progressHud.setBackgroundColor(new Color(options.backgroundColor).android);
+      this._progressHud.setWindowColor(new Color(options.backgroundColor).android);
     }
 
     if (options.hudColor) {
-      this._progressHud.setWindowColor(new Color(options.backgroundColor).android);
+      this._progressHud.setBackgroundColor(new Color(options.hudColor).android);
     }
 
     if (options.progressTick) {
@@ -79,6 +85,10 @@ export class NSProgressHud extends Common {
 
     if (options.tickInterval) {
       this.tickInterval = options.tickInterval;
+    }
+
+    if (options.dimBackground) {
+      this._progressHud.setDimAmount(1);
     }
 
     if (options.progressType) {

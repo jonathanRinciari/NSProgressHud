@@ -8,6 +8,8 @@ interface ColorOption {
     progressTick?: number;
     minShowTime?: number;
     tickInterval?: number;
+    width?: number;
+    height?: number;
     progressType: 'annular' | 'determinate' | 'bar' | 'indeterminate';
 }
 export declare class NSProgressHud extends Common {
@@ -16,7 +18,7 @@ export declare class NSProgressHud extends Common {
     progressTickMark: number;
     tickInterval: number;
     constructor();
-    showProgress(message?: string, options?: ColorOption): void;
+    showProgress(message?: string, options?: ColorOption, progress?: any): void;
     private updateProgress;
     dismiss(): void;
     private setOptions;

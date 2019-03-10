@@ -1,6 +1,7 @@
 import { Common } from './NSProgressHud.common';
 import { Color } from 'tns-core-modules/color';
 import { ios as iosApp } from "tns-core-modules/application";
+import { BehaviorSubject } from 'rxjs';
 
 interface ColorOption {
   backgroundColor?: string;
@@ -11,12 +12,14 @@ interface ColorOption {
   progressTick?: number;
   minShowTime?: number;
   tickInterval?: number;
+  width?: number;
+  height?: number;
   progressType: 'annular' | 'determinate' | 'bar' | 'indeterminate';
 }
 export class NSProgressHud extends Common {
   private _hud: MBProgressHUD;
   progress: any = 0;
-  progressTickMark = .01;
+  progressTickMark = 1;
   tickInterval = 500;
 
   constructor() {
@@ -25,15 +28,27 @@ export class NSProgressHud extends Common {
     this._hud.progress = this.progressTickMark;
   }
 
-  showProgress(message?: string, options?: ColorOption) {
+  showProgress(message?: string, options?: ColorOption, progressStatus?: BehaviorSubject<{progress: number}>) {
+    if (progressStatus) {
+      const progress$ = progressStatus.subscribe((data: {progress: number}) => {
+
+        this._hud.progress = data.progress * .1;
+        if (data.progress * .1 >= 1) {
+          progress$.unsubscribe();
+          this._hud.hideAnimated(true);
+        }
+      });
+    }
     if (options) {
       this.setOptions(options);
     }
     if (message) {
       this._hud.label.text = message;
     }
-    this._hud.progress = .01;
-    this.updateProgress(this.progress);
+    if (!progressStatus) {
+      this._hud.progress = 1;
+      this.updateProgress(this.progress);
+    }
     this._hud.showAnimated(true);
   }
 
@@ -41,7 +56,7 @@ export class NSProgressHud extends Common {
   const interval = setInterval(() => {
       this.progress += this.progressTickMark;
       this._hud.progress = this.progress;
-      if (this.progress >= 1) {
+      if (this.progress >= 100) {
         clearInterval(interval);
         this._hud.hideAnimated(true);
       }

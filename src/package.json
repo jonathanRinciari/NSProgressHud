@@ -55,6 +55,7 @@
         "semver": "^5.6.0"
     },
     "dependencies": {
+        "rxjs": "^6.4.0",
         "tns-android": "^5.2.1"
     },
     "bootstrapper": "nativescript-plugin-seed"

@@ -19,7 +19,7 @@ export class DemoComponent implements OnInit {
 
   show(type: string) {
     if (type === 'indeterminate') {
-      this.hud.showProgress(null, {hudColor: '#080452', progressType: 'indeterminate', size: {height: 150, width: 150}});
+      this.hud.showProgress(null, { progressType: 'indeterminate', size: {height: 150, width: 150}});
 
       setTimeout(() => {
         this.hud.dismiss();

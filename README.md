@@ -12,34 +12,63 @@ tns plugin add NSProgressHud
 ```typescript
     import { NSProgressHud } from 'NSProgressHud';
 
-    class ExampleUsage {
-        progressHud: NSProgressHud;
+export class DemoComponent implements OnInit {
+    private hud: NSProgressHud;
+    constructor() {}
 
-        constructor() {
-            this.progressHud = new NSProgressHud();
+    ngOnInit() {
+        this.hud = new NSProgressHud();
+    }
+
+
+    show(type: string) {
+        if (type === 'indeterminate') {
+        this.hud.showProgress(null, { progressType: 'indeterminate', size: {height: 150, width: 150}});
+
+        setTimeout(() => {
+            this.hud.dismiss();
+        }, 2000);
         }
 
-        onClickLoading() {
-            this.progressHud.showSuccess("Success");
+        if (type === 'determinate') {
+        this.hud.showProgress(null, {hudColor: '#080452', progressType: 'determinate', size: {height: 150, width: 150}});
         }
 
-        onShowLoading() {
-            this.progressHud.showLoading();
+        if (type === 'bar') {
+        this.hud.showProgress(null, {hudColor: '#080452', progressType: 'bar', size: {height: 150, width: 150}});
         }
 
-        onShowError() {
-            this.progressHud.showError("Error");
+        if (type === 'annular') {
+        this.hud.showProgress(null, {hudColor: '#080452', progressType: 'annular', size: {height: 150, width: 150}});
         }
     }
 
-        // Example Typing
-    showLoading(message?: String, options?: ColorOption);
+    showWithTimer() {
+        let progress = 0;
+        const taskWithTime = new BehaviorSubject({progress});
+        this.hud.showProgress('Loading', {progressType: 'annular', size: {height: 150, width: 150}}. taskWithTime);
+        setTimeout(() => {
+            progress += 1;
+            taskWithTime.next({progress})
+        }, 1000)
+    }
+}
 
-    interface ColorOption {
+        // Example Typing
+    showProgress(message?: String, options?: ColorOption, progressStatus?: BehaviorSubject<{progress: number}>);
+
+    export interface ColorOption {
         backgroundColor?: string;
         hudColor?: string;
-        spinnerColor?: string;
-        statusColor?: string;
+        activityColor?: string;
+        tintColor?: string;
+        labelColor?: string;
+        progressTick?: number;
+        minShowTime?: number;
+        tickInterval?: number;
+        backgroundOpacity?: number;
+        size?: {width: number, height: number};
+        progressType: 'annular' | 'determinate' | 'bar' | 'indeterminate';
     }
 
 

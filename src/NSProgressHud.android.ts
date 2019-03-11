@@ -1,23 +1,9 @@
 /// <reference path="./node_modules/tns-platform-declarations/android.d.ts" />
-import { Common } from './NSProgressHud.common';
+import { Common, ColorOption } from './NSProgressHud.common';
 import * as utils from 'tns-core-modules/utils/utils';
 import { android as androidApp } from "tns-core-modules/application";
 import { Color } from 'tns-core-modules/color/color';
 import { BehaviorSubject } from 'rxjs';
-
-interface ColorOption {
-  backgroundColor?: string;
-  hudColor?: string;
-  spinnerColor?: string;
-  tintColor?: string;
-  labelColor?: string;
-  backgroundOpacity?: number;
-  progressTick?: number;
-  minShowTime?: number;
-  tickInterval?: number;
-  size?: {width: number, height: number};
-  progressType: 'annular' | 'determinate' | 'bar' | 'indeterminate';
-}
 
 export class NSProgressHud extends Common  {
   private _context: any;

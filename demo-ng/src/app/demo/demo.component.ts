@@ -19,7 +19,7 @@ export class DemoComponent implements OnInit {
 
   show(type: string) {
     if (type === 'indeterminate') {
-      this.hud.showProgress(null, {backgroundOpacity: .6, backgroundColor: '#EFEE00', progressType: 'indeterminate', size: {height: 200, width: 300}});
+      this.hud.showProgress(null, {hudColor: '#080452', progressType: 'indeterminate', size: {height: 150, width: 150}});
 
       setTimeout(() => {
         this.hud.dismiss();
@@ -27,15 +27,15 @@ export class DemoComponent implements OnInit {
     }
 
     if (type === 'determinate') {
-      this.hud.showProgress(null, {hudColor: '#EFEE00', progressType: 'determinate', size: {height: 100, width: 100}});
+      this.hud.showProgress(null, {hudColor: '#080452', progressType: 'determinate', size: {height: 150, width: 150}});
     }
 
     if (type === 'bar') {
-      this.hud.showProgress(null, {hudColor: '#EFEE00', progressType: 'bar', size: {height: 100, width: 100}});
+      this.hud.showProgress(null, {hudColor: '#080452', progressType: 'bar', size: {height: 150, width: 150}});
     }
 
     if (type === 'annular') {
-      this.hud.showProgress(null, {hudColor: '#EFEE00', progressType: 'annular', size: {height: 100, width: 100}});
+      this.hud.showProgress(null, {hudColor: '#080452', progressType: 'annular', size: {height: 150, width: 150}});
     }
   }
 }

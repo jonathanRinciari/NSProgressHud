@@ -1,25 +1,12 @@
-import { Common } from './NSProgressHud.common';
+import { Common, ColorOption } from './NSProgressHud.common';
 import { Color } from 'tns-core-modules/color';
 import { ios as iosApp } from "tns-core-modules/application";
 import { BehaviorSubject } from 'rxjs';
 
-interface ColorOption {
-  backgroundColor?: string;
-  hudColor?: string;
-  spinnerColor?: string;
-  tintColor?: string;
-  labelColor?: string;
-  progressTick?: number;
-  minShowTime?: number;
-  tickInterval?: number;
-  backgroundOpacity?: number;
-  size?: {width: number, height: number};
-  progressType: 'annular' | 'determinate' | 'bar' | 'indeterminate';
-}
 export class NSProgressHud extends Common {
   private _hud: MBProgressHUD;
   progress: any = 0;
-  progressTickMark = .1;
+  progressTickMark = .01;
   tickInterval = 500;
 
   constructor() {
@@ -78,16 +65,15 @@ export class NSProgressHud extends Common {
 
     if (options.hudColor) {
       this._hud.color = new Color(options.hudColor).ios;
-      this._hud.opacity = .6;
+      this._hud.opacity = .8;
     }
 
     if (options.backgroundOpacity) {
       this._hud.dimBackground = true;
-      this._hud.opacity = .6;
     }
 
-    if (options.spinnerColor) {
-      this._hud.activityIndicatorColor = new Color(options.spinnerColor).ios;
+    if (options.activityColor) {
+      this._hud.activityIndicatorColor = new Color(options.activityColor).ios;
     }
 
     if (options.labelColor) {
@@ -100,7 +86,7 @@ export class NSProgressHud extends Common {
     }
 
     if (options.progressTick) {
-      this.progressTickMark = options.progressTick;
+      this.progressTickMark = options.progressTick * .1;
     }
 
     if (options.tickInterval) {

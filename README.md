@@ -70,26 +70,6 @@ export class DemoComponent implements OnInit {
         size?: {width: number, height: number};
         progressType: 'annular' | 'determinate' | 'bar' | 'indeterminate';
     }
-
-
-    // Example Usage of Options
-
-    class ExampleWithOptions {
-        constructor() {
-            let progressHud = new NSProgressHud();
-            const options  = {
-                hudColor: '#000000',
-                spinnerColor: '#FFFFFF'
-            }
-
-            progressHud.showLoading(null, options);
-
-            setTimeout(() => {
-                progressHud.dismiss();
-            }, 5000)
-        }
-    }
-
 ```
 ## License
 

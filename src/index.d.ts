@@ -9,11 +9,11 @@ interface ColorOption {
     progressTick?: number;
     minShowTime?: number;
     tickInterval?: number;
+    backgroundOpacity?: number;
     size?: {
         width: number;
         height: number;
     };
-    dimBackground?: boolean;
     progressType: 'annular' | 'determinate' | 'bar' | 'indeterminate';
 }
 export declare class NSProgressHud extends Common {

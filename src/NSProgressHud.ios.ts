@@ -12,8 +12,8 @@ interface ColorOption {
   progressTick?: number;
   minShowTime?: number;
   tickInterval?: number;
+  backgroundOpacity?: number;
   size?: {width: number, height: number};
-  dimBackground?: boolean;
   progressType: 'annular' | 'determinate' | 'bar' | 'indeterminate';
 }
 export class NSProgressHud extends Common {
@@ -81,8 +81,9 @@ export class NSProgressHud extends Common {
       this._hud.opacity = .6;
     }
 
-    if (options.dimBackground) {
+    if (options.backgroundOpacity) {
       this._hud.dimBackground = true;
+      this._hud.opacity = .6;
     }
 
     if (options.spinnerColor) {

@@ -11,11 +11,11 @@ interface ColorOption {
   spinnerColor?: string;
   tintColor?: string;
   labelColor?: string;
+  backgroundOpacity?: number;
   progressTick?: number;
   minShowTime?: number;
   tickInterval?: number;
   size?: {width: number, height: number};
-  dimBackground?: boolean;
   progressType: 'annular' | 'determinate' | 'bar' | 'indeterminate';
 }
 
@@ -88,8 +88,8 @@ export class NSProgressHud extends Common  {
       this.tickInterval = options.tickInterval;
     }
 
-    if (options.dimBackground) {
-      this._progressHud.setDimAmount(1);
+    if (options.backgroundOpacity) {
+      this._progressHud.setDimAmount(options.backgroundOpacity);
     }
 
     if (options.size) {

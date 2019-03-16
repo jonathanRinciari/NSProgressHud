@@ -1,6 +1,6 @@
 {
     "name": "NSProgressHud",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Nativescript Progress Hud",
     "main": "NSProgressHud",
     "typings": "index.d.ts",

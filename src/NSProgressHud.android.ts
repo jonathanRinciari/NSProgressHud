@@ -16,7 +16,7 @@ export class NSProgressHud extends Common  {
   }
 
   public showProgress(message?: string, options?: ColorOption, progressStatus?: BehaviorSubject<{progress: number}>) {
-    
+
     this._context = androidApp.startActivity;
     this._progressHud = new com.kaopiz.kprogresshud.KProgressHUD(this._context);
     this._progressHud.setMaxProgress(100);
